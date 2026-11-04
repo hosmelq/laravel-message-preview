@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use HosmelQ\MessagePreview\Http\Controllers\CheckMessageLinksController;
 use HosmelQ\MessagePreview\Http\Controllers\FingerprintController;
+use HosmelQ\MessagePreview\Http\Controllers\HomeController;
 use HosmelQ\MessagePreview\Http\Controllers\MessageController;
 use HosmelQ\MessagePreview\Http\Controllers\PreviewAttachmentController;
 use HosmelQ\MessagePreview\Http\Controllers\PreviewController;
@@ -18,7 +19,7 @@ Route::prefix(config()->string('message-preview.route.path'))
     ->as('message-preview.')
     ->middleware(EnsureLocalEnvironment::class)
     ->group(function (): void {
-        Route::view('/', 'message-preview::app')->name('index');
+        Route::get('/', HomeController::class)->name('index');
 
         Route::prefix('messages/{message}/previews/{variant}')
             ->as('previews.')

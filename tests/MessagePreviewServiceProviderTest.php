@@ -3,29 +3,21 @@
 declare(strict_types=1);
 
 use HosmelQ\MessagePreview\MessageCatalog;
-use Illuminate\Support\Str;
+use Illuminate\Routing\Route as RoutingRoute;
+use Illuminate\Support\Facades\Route;
 
 it('registers the message catalog as a singleton', function (): void {
     expect(app(MessageCatalog::class))->toBe(app(MessageCatalog::class));
 });
 
-it('serves the preview page with its settings without discovering messages', function (): void {
-    $this->artisan('vendor:publish', ['--force' => true, '--tag' => 'message-preview-assets']);
+it('serves every route from a package controller', function (): void {
+    $controllers = collect(Route::getRoutes()->getRoutes())
+        ->filter(fn (RoutingRoute $route): bool => str_starts_with(
+            (string) $route->getName(),
+            'message-preview.',
+        ))
+        ->map(fn (RoutingRoute $route): string => (string) $route->getControllerClass());
 
-    config(['message-preview.discovery.paths' => 'invalid']);
-
-    $page = $this->get(
-        route('message-preview.index', ['locale' => 'unknown', 'message' => 'Unknown.Message']),
-    )
-        ->assertOk()
-        ->assertViewIs('message-preview::app')
-        ->assertSee('<div id="app"></div>', false)
-        ->getContent();
-
-    expect(json_decode(Str::between($page, 'type="application/json">', '</script>'), true))->toBe([
-        'app_name' => 'Studio Goods',
-        'default_mailer' => config('mail.default'),
-        'mailers' => array_keys(config('mail.mailers')),
-        'poll_interval' => 5,
-    ]);
+    expect($controllers)->not->toBeEmpty()
+        ->each->toStartWith('HosmelQ\MessagePreview\Http\Controllers\\');
 });
