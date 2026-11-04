@@ -1,0 +1,11 @@
+@import 'tailwindcss' source('.');
+@import '@heroui/styles';
+@import './styles/checks-bar.css';
+@import './styles/message-tree.css';
+
+@source '../views';
+
+.theme-switching,
+.theme-switching * {
+  transition: none !important;
+}

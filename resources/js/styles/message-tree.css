@@ -1,0 +1,97 @@
+.message-tree {
+  @apply flex flex-col gap-1 outline-none;
+}
+
+.message-tree__section {
+  @apply flex flex-col gap-0.5;
+}
+
+.message-tree__header {
+  @apply px-2 py-1.5 text-xs font-medium text-muted;
+}
+
+.message-tree__item {
+  @apply relative flex outline-none;
+}
+
+.message-tree__item:not([data-level='1'])::before {
+  content: '';
+  @apply pointer-events-none absolute -inset-y-px start-2;
+  width: calc((var(--tree-item-level) - 1) * 1rem);
+  background: repeating-linear-gradient(
+    to right,
+    color-mix(in oklab, var(--foreground) 10%, transparent) 0 1px,
+    transparent 1px 1rem
+  );
+}
+
+.message-tree__content {
+  @apply flex h-9 min-w-0 flex-1 items-center gap-3 rounded-2xl px-2 text-sm text-foreground outline-none select-none no-highlight;
+  margin-inline-start: calc((var(--tree-item-level) - 1) * 1rem);
+  cursor: var(--cursor-interactive);
+  transition: transform 250ms var(--ease-out-quart);
+  @apply motion-reduce:transition-none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .message-tree__item[data-hovered] .message-tree__content {
+    @apply bg-default;
+  }
+}
+
+.message-tree__item[data-pressed] .message-tree__content,
+.message-tree__content[data-pressed] {
+  transform: scale(0.98);
+}
+
+.message-tree__item[data-focus-visible] .message-tree__content {
+  @apply status-focused;
+}
+
+.message-tree__item[data-current] .message-tree__content {
+  @apply bg-surface shadow-surface;
+}
+
+.message-tree--secondary .message-tree__item[data-current] .message-tree__content {
+  @apply bg-default shadow-none;
+}
+
+.message-tree__icon {
+  @apply size-4 shrink-0 text-muted;
+}
+
+.message-tree__item[data-current] .message-tree__icon {
+  @apply text-foreground;
+}
+
+.message-tree__label {
+  @apply min-w-0 flex-1 truncate;
+}
+
+.message-tree__count {
+  @apply text-xs text-muted tabular-nums;
+}
+
+.message-tree__item[data-has-child-items] .message-tree__content {
+  @apply pe-8;
+}
+
+.message-tree__chevron {
+  @apply absolute end-2 top-1/2 flex size-5 -translate-y-1/2 items-center justify-center text-muted outline-none;
+  cursor: var(--cursor-interactive);
+
+  & svg {
+    @apply size-3.5;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .message-tree__item[data-hovered] .message-tree__chevron svg {
+    transition: rotate 200ms var(--ease-out-quart);
+    @apply motion-reduce:transition-none;
+  }
+}
+
+.message-tree__item:not([data-expanded]) .message-tree__chevron svg {
+  rotate: -90deg;
+}

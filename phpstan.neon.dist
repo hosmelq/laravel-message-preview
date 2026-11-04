@@ -1,0 +1,12 @@
+includes:
+  - vendor/hosmelq/php-coding-standard/config/phpstan-laravel-package.neon
+
+parameters:
+  configDirectories:
+    - config
+    - vendor/orchestra/testbench-core/laravel/config
+  paths:
+    - src
+  phpVersion:
+    max: 80599
+    min: 80400

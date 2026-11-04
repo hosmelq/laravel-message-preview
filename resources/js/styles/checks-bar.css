@@ -1,0 +1,83 @@
+.checks-bar {
+  @apply bg-overlay;
+
+  border-radius: min(32px, var(--radius-3xl));
+  box-shadow: var(--overlay-shadow);
+  view-transition-name: checks-bar;
+}
+
+.checks-separator {
+  @apply flex h-2 items-center justify-center outline-none;
+
+  &::after {
+    @apply h-1 w-8 rounded-full bg-separator-tertiary;
+
+    content: '';
+  }
+
+  &:is([data-separator='hover'], [data-separator='active'])::after {
+    @apply bg-border-tertiary;
+  }
+
+  &:focus-visible::after {
+    @apply status-focused;
+  }
+}
+
+[data-group]:has(> .checks-separator[data-separator='active']) iframe {
+  pointer-events: none;
+}
+
+:root:active-view-transition-type(checks-open, checks-close) {
+  & .checks-bar {
+    background: none;
+    box-shadow: none;
+  }
+
+  & .email-area {
+    view-transition-name: email-area;
+  }
+
+  & .checks-separator {
+    visibility: hidden;
+  }
+
+  &::view-transition-group(checks-bar) {
+    @apply bg-overlay;
+
+    border-radius: min(32px, var(--radius-3xl));
+    box-shadow: var(--overlay-shadow);
+  }
+
+  &::view-transition-group(email-area) {
+    border-radius: min(32px, var(--radius-3xl));
+  }
+
+  &::view-transition-group(checks-bar),
+  &::view-transition-group(email-area) {
+    overflow: clip;
+    animation-duration: 250ms;
+    animation-timing-function: var(--ease-out-fluid);
+  }
+
+  &::view-transition-old(checks-bar),
+  &::view-transition-new(checks-bar) {
+    height: 100%;
+    object-fit: none;
+    object-position: bottom;
+  }
+
+  &::view-transition-old(email-area),
+  &::view-transition-new(email-area) {
+    height: 100%;
+    object-fit: none;
+    object-position: top;
+  }
+}
+
+:root:active-view-transition-type(checks-close) {
+  &::view-transition-group(checks-bar),
+  &::view-transition-group(email-area) {
+    animation-duration: 200ms;
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "ignorePatterns": ["resources/dist/**"],
+  "options": {
+    "reportUnusedDisableDirectives": "error",
+    "typeAware": true,
+    "typeCheck": true
+  },
+  "plugins": ["eslint", "import", "jsx-a11y", "oxc", "promise", "react", "typescript", "unicorn"],
+  "rules": {
+    "import/no-cycle": "error",
+    "jsx-a11y/no-autofocus": ["warn", {"ignoreNonDOM": true}]
+  }
+}

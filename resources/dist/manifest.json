@@ -1,0 +1,68 @@
+{
+  "_caniemail-DCMk6CFV.js": {
+    "file": "assets/caniemail-DCMk6CFV.js",
+    "name": "caniemail",
+    "imports": [
+      "_rolldown-runtime-COiEfhsA.js"
+    ]
+  },
+  "_lib-Cg-oQJ-D.js": {
+    "file": "assets/lib-Cg-oQJ-D.js",
+    "name": "lib",
+    "imports": [
+      "_rolldown-runtime-COiEfhsA.js"
+    ]
+  },
+  "_rolldown-runtime-COiEfhsA.js": {
+    "file": "assets/rolldown-runtime-COiEfhsA.js",
+    "name": "rolldown-runtime"
+  },
+  "resources/js/app.tsx": {
+    "file": "assets/app-DHglGRsA.js",
+    "name": "app",
+    "src": "resources/js/app.tsx",
+    "isEntry": true,
+    "imports": [
+      "_rolldown-runtime-COiEfhsA.js"
+    ],
+    "dynamicImports": [
+      "resources/js/lib/accessibility.ts",
+      "_caniemail-DCMk6CFV.js",
+      "resources/js/pages/_components/ChecksResults.tsx",
+      "resources/js/lib/highlight.ts"
+    ],
+    "css": [
+      "assets/app-Dr1rsowa.css"
+    ]
+  },
+  "resources/js/lib/accessibility.ts": {
+    "file": "assets/accessibility-DAlB3d6O.js",
+    "name": "accessibility",
+    "src": "resources/js/lib/accessibility.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx"
+    ]
+  },
+  "resources/js/lib/highlight.ts": {
+    "file": "assets/highlight-AfiPvU8J.js",
+    "name": "highlight",
+    "src": "resources/js/lib/highlight.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "_lib-Cg-oQJ-D.js"
+    ]
+  },
+  "resources/js/pages/_components/ChecksResults.tsx": {
+    "file": "assets/ChecksResults-SK4xLbh3.js",
+    "name": "ChecksResults",
+    "src": "resources/js/pages/_components/ChecksResults.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-COiEfhsA.js",
+      "resources/js/app.tsx",
+      "_lib-Cg-oQJ-D.js",
+      "_caniemail-DCMk6CFV.js"
+    ]
+  }
+}

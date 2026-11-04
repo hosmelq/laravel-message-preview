@@ -1,0 +1,34 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "bracketSpacing": false,
+  "ignorePatterns": [
+    ".cache",
+    ".github",
+    "composer.json",
+    "composer.lock",
+    "docs",
+    "node_modules",
+    "resources/dist",
+    "vendor",
+    "*.md"
+  ],
+  "semi": false,
+  "singleQuote": true,
+  "sortImports": {
+    "groups": [
+      ["builtin"],
+      ["external"],
+      ["internal"],
+      ["parent", "sibling", "index"],
+      ["unknown"]
+    ],
+    "internalPattern": ["#/"]
+  },
+  "sortPackageJson": {
+    "sortScripts": true
+  },
+  "sortTailwindcss": {
+    "functions": ["cn"],
+    "stylesheet": "./resources/js/index.css"
+  }
+}

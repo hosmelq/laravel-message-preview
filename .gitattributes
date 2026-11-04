@@ -1,0 +1,23 @@
+* eol=lf text=auto
+
+.editorconfig export-ignore
+.gitattributes export-ignore
+.github export-ignore
+.gitignore export-ignore
+.oxfmtrc.json export-ignore
+.oxlintrc.json export-ignore
+CHANGELOG.md export-ignore
+composer-dependency-analyser.php export-ignore
+docs export-ignore
+ecs.php export-ignore
+nub.lock export-ignore
+package.json export-ignore
+phpstan.neon.dist export-ignore
+phpunit.xml.dist export-ignore
+rector.php export-ignore
+resources/js export-ignore
+testbench.yaml export-ignore
+tests export-ignore
+tsconfig*.json export-ignore
+vite.config.ts export-ignore
+workbench export-ignore

@@ -1,0 +1,20 @@
+env:
+  APP_ENV: local
+
+migrations:
+  - workbench/database/migrations
+
+providers:
+  - HosmelQ\MessagePreview\MessagePreviewServiceProvider
+  - Workbench\App\Providers\WorkbenchServiceProvider
+
+workbench:
+  assets:
+    - message-preview-assets
+  build:
+    - asset-publish
+  discovers:
+    views: true
+    web: true
+  install: false
+  start: '/'

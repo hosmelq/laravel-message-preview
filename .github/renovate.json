@@ -1,0 +1,65 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "customManagers": [
+    {
+      "customType": "jsonata",
+      "datasourceTemplate": "npm",
+      "fileFormat": "json",
+      "managerFilePatterns": ["/^package\\.json$/"],
+      "matchStrings": [
+        "devEngines.packageManager[name = 'nub'].{'currentValue': version, 'depName': 'nub', 'depType': 'packageManager', 'packageName': '@nubjs/nub'}"
+      ],
+      "versioningTemplate": "npm"
+    },
+    {
+      "customType": "regex",
+      "datasourceTemplate": "node-version",
+      "depNameTemplate": "node",
+      "managerFilePatterns": [".github/workflows/*.yml"],
+      "matchStrings": ["NODE_VERSION: '(?<currentValue>[^']+)'"]
+    },
+    {
+      "customType": "regex",
+      "datasourceTemplate": "npm",
+      "depNameTemplate": "nub",
+      "managerFilePatterns": [".github/workflows/*.yml"],
+      "matchStrings": ["NUB_VERSION: '(?<currentValue>[^']+)'"],
+      "packageNameTemplate": "@nubjs/nub"
+    },
+    {
+      "customType": "regex",
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "zizmorcore/zizmor",
+      "extractVersionTemplate": "^v(?<version>.+)$",
+      "managerFilePatterns": [".github/workflows/zizmor.yml"],
+      "matchStrings": ["version: (?<currentValue>[0-9]+\\.[0-9]+\\.[0-9]+)"]
+    }
+  ],
+  "dependencyDashboard": true,
+  "enabledManagers": ["composer", "custom.jsonata", "custom.regex", "github-actions", "npm"],
+  "extends": ["config:recommended", "group:all", "helpers:pinGitHubActionDigests"],
+  "gitIgnoredAuthors": ["41898282+github-actions[bot]@users.noreply.github.com"],
+  "includePaths": [".github/workflows/**", "composer.json", "package.json"],
+  "minimumReleaseAge": "1 day",
+  "packageRules": [
+    {
+      "matchDepNames": ["pullfrog/pullfrog"],
+      "matchManagers": ["github-actions"],
+      "pinDigests": false
+    },
+    {
+      "enabled": false,
+      "matchDepNames": ["php"]
+    },
+    {
+      "matchManagers": ["composer"],
+      "postUpdateOptions": ["composerWithAll"]
+    },
+    {
+      "matchManagers": ["composer", "custom.jsonata", "npm"],
+      "rangeStrategy": "bump"
+    }
+  ],
+  "rebaseWhen": "conflicted",
+  "semanticCommits": "enabled"
+}

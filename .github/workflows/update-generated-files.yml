@@ -1,0 +1,116 @@
+name: Update generated files
+
+on:
+  pull_request_review:
+    types: [submitted]
+
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+
+permissions: {}
+
+env:
+  NODE_VERSION: '26.13.0'
+  NUB_VERSION: '0.9.7'
+
+jobs:
+  update-generated-files:
+    name: Update generated files
+
+    if: github.event.review.state == 'approved' && github.event.pull_request.user.id == 29139614 && github.event.pull_request.head.repo.full_name == github.repository
+
+    permissions:
+      contents: write # push the regenerated files back to the pull request branch
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Setup Nub
+        uses: nubjs/setup-nub@c7b970ec04655a2f0a111cd436cc182a3b660e7a # v0.6.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          nub-version: ${{ env.NUB_VERSION }}
+
+      - name: Install npm dependencies
+        run: nub install --ignore-scripts --no-frozen-lockfile
+
+      - name: Build frontend assets
+        run: nub run build
+
+      - name: Commit updated files
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          commit_files() {
+            local headline="$1"
+            local current_head_sha next_head_sha path status
+            shift
+
+            if git diff --cached --quiet -- "$@"; then
+              return
+            fi
+
+            : > "${RUNNER_TEMP}/additions.json"
+            : > "${RUNNER_TEMP}/deletions.json"
+
+            while IFS= read -r -d '' status && IFS= read -r -d '' path; do
+              if [ "${status}" = 'D' ]; then
+                jq --null-input --arg path "${path}" '{path: $path}' >> "${RUNNER_TEMP}/deletions.json"
+
+                continue
+              fi
+
+              base64 --wrap 0 "${path}" > "${RUNNER_TEMP}/contents.base64"
+
+              jq --null-input \
+                --arg path "${path}" \
+                --rawfile contents "${RUNNER_TEMP}/contents.base64" \
+                '{contents: $contents, path: $path}' >> "${RUNNER_TEMP}/additions.json"
+            done < <(git diff --cached --name-status --no-renames -z -- "$@")
+
+            jq --null-input \
+              --arg head_ref "${HEAD_REF}" \
+              --arg head_sha "${HEAD_SHA}" \
+              --arg headline "${headline}" \
+              --arg repository "${GITHUB_REPOSITORY}" \
+              --slurpfile additions "${RUNNER_TEMP}/additions.json" \
+              --slurpfile deletions "${RUNNER_TEMP}/deletions.json" \
+              '{
+                query: "mutation($input: CreateCommitOnBranchInput!) { createCommitOnBranch(input: $input) { commit { oid } } }",
+                variables: {
+                  input: {
+                    branch: {branchName: $head_ref, repositoryNameWithOwner: $repository},
+                    expectedHeadOid: $head_sha,
+                    fileChanges: {additions: $additions, deletions: $deletions},
+                    message: {headline: $headline}
+                  }
+                }
+              }' > "${RUNNER_TEMP}/generated-files-commit.json"
+
+            if next_head_sha="$(gh api graphql --input "${RUNNER_TEMP}/generated-files-commit.json" --jq '.data.createCommitOnBranch.commit.oid')"; then
+              HEAD_SHA="${next_head_sha}"
+              return
+            fi
+
+            current_head_sha="$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/heads/${HEAD_REF}" --jq '.object.sha')"
+
+            if [ "${current_head_sha}" != "${HEAD_SHA}" ]; then
+              echo 'Renovate updated the branch while the files were being generated; approve the pull request again to retry.'
+              exit 0
+            fi
+
+            exit 1
+          }
+
+          git add --all
+          commit_files 'chore(deps): update Nub lockfile' nub.lock
+          commit_files 'build: update frontend assets' resources/dist
