@@ -1,0 +1,95 @@
+{
+  "api_version": "1.0.4",
+  "last_update_date": "2026-01-01 00:00:00 +0000",
+  "nicenames": {
+    "family": {
+      "gmail": "Gmail",
+      "microsoft": "Microsoft",
+      "outlook": "Outlook",
+      "yahoo": "Yahoo! Mail"
+    },
+    "platform": {
+      "desktop-webmail": "Desktop Webmail",
+      "ios": "iOS",
+      "android": "Android",
+      "windows": "Windows"
+    }
+  },
+  "data": [
+    {
+      "slug": "css-border-radius",
+      "title": "border-radius",
+      "url": "https://www.caniemail.com/features/css-border-radius/",
+      "category": "css",
+      "stats": {
+        "gmail": {
+          "desktop-webmail": {"2026-01": "y"},
+          "android": {"2026-01": "y"}
+        },
+        "outlook": {
+          "windows": {"2019": "y", "16.80": "a #1"}
+        },
+        "yahoo": {
+          "desktop-webmail": {"2026-01": "y"}
+        }
+      },
+      "notes_by_num": {"1": "Only on rectangles."}
+    },
+    {
+      "slug": "css-display-flex",
+      "title": "display:flex",
+      "url": "https://www.caniemail.com/features/css-display-flex/",
+      "category": "css",
+      "stats": {
+        "gmail": {
+          "desktop-webmail": {"2026-01": "a #1"},
+          "ios": {"2026-01": "u"},
+          "android": {"2026-01": "n #1 #2"}
+        },
+        "outlook": {
+          "windows": {"2019": "n #2"}
+        },
+        "yahoo": {
+          "desktop-webmail": {"2026-01": "y"}
+        }
+      },
+      "notes_by_num": {"1": "Partial support.", "2": "Not supported."}
+    },
+    {
+      "slug": "css-margin",
+      "title": "margin",
+      "url": "https://www.caniemail.com/features/css-margin/",
+      "category": "css",
+      "stats": {
+        "gmail": {
+          "desktop-webmail": {"2026-01": "a"}
+        },
+        "outlook": {
+          "windows": {"2019": "a"}
+        },
+        "yahoo": {
+          "desktop-webmail": {"2026-01": "y"}
+        }
+      },
+      "notes_by_num": null
+    },
+    {
+      "slug": "css-rgb",
+      "title": "rgb()",
+      "url": "https://www.caniemail.com/features/css-rgb/",
+      "category": "css",
+      "stats": {
+        "gmail": {
+          "desktop-webmail": {"2026-01": "u"}
+        },
+        "outlook": {
+          "windows": {"2019": "y"}
+        },
+        "yahoo": {
+          "desktop-webmail": {"2026-01": "y"}
+        }
+      },
+      "notes_by_num": null
+    }
+  ]
+}

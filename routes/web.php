@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use HosmelQ\MessagePreview\Http\Controllers\CheckMessageCompatibilityController;
 use HosmelQ\MessagePreview\Http\Controllers\CheckMessageLinksController;
 use HosmelQ\MessagePreview\Http\Controllers\FingerprintController;
 use HosmelQ\MessagePreview\Http\Controllers\HomeController;
@@ -33,6 +34,8 @@ Route::prefix(config()->string('message-preview.route.path'))
             });
 
         Route::prefix('api')->as('api.')->group(function (): void {
+            Route::post('compatibility', CheckMessageCompatibilityController::class)
+                ->name('compatibility');
             Route::get('fingerprint', [FingerprintController::class, 'show'])->name('fingerprint');
             Route::post('links', CheckMessageLinksController::class)->name('links');
             Route::get('messages', [MessageController::class, 'index'])->name('messages');

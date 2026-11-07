@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace HosmelQ\MessagePreview;
 
+use HosmelQ\CanIEmail\CanIEmail;
 use Override;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
@@ -31,6 +32,7 @@ final class MessagePreviewServiceProvider extends PackageServiceProvider
     #[Override]
     public function packageRegistered(): void
     {
+        $this->app->singleton(CanIEmail::class, CanIEmail::create(...));
         $this->app->singleton(MessageCatalog::class);
     }
 }

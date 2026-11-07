@@ -20,9 +20,9 @@ The check reads the email at a width of 600 pixels, in the color scheme the prev
 
 ## Compatibility
 
-Compatibility lists the HTML and CSS features the message uses that one of the chosen mail clients does not fully support, the least supported first. It reads the rendered HTML with the [caniemail](https://github.com/shellscape/caniemail) package, so it covers Blade, Markdown, and the CSS Laravel inlines. The clients button above the table chooses the mail clients to check, Gmail, Apple Mail, Outlook, and Yahoo! Mail by default.
+Compatibility lists the HTML and CSS features the message uses that one of the chosen mail clients does not fully support, the least supported first. The server reads the rendered HTML with [Can I email PHP](https://github.com/hosmelq/caniemail-php), so it covers Blade, Markdown, and the CSS Laravel inlines. The clients button above the table chooses the mail clients to check, Gmail, Apple Mail, Outlook, and Yahoo! Mail by default.
 
-Select a feature to open its page on caniemail.com, or a status to see the platforms and notes behind it. No data means caniemail has no data on the feature for that client. The data ships with the package, works offline, and reflects the latest tested version of each client.
+Select a feature to open its page on caniemail.com, or a status to see the platforms and notes behind it. No data means caniemail has not tested the feature in that client. The data ships with the package, works offline, and reflects the last version caniemail.com lists for each client.
 
 ![Compatibility open in the checks bar, with the features Gmail, Apple Mail, Outlook, and Yahoo! Mail lack](../images/compatibility.png)
 

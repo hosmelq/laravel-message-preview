@@ -1,7 +1,7 @@
 import {mutationOptions, queryOptions, type QueryClient} from '@tanstack/react-query'
 
 import {withShortDataUris} from '#/lib/format'
-import type {Catalog, LinkCheck, Preview, Selection} from '#/types/preview'
+import type {Catalog, CompatibilityIssue, LinkCheck, Preview, Selection} from '#/types/preview'
 
 const basePath = location.pathname.replace(/\/+$/, '')
 
@@ -76,6 +76,22 @@ export function linksQuery(html: null | string) {
             })
           ).data,
     queryKey: ['links', html],
+  })
+}
+
+export function compatibilityQuery(html: null | string, clients: string[]) {
+  return queryOptions({
+    queryFn: async ({signal}) =>
+      html === null || clients.length === 0
+        ? []
+        : (
+            await request<{data: CompatibilityIssue[]}>('/compatibility', {
+              body: JSON.stringify({clients, html: withShortDataUris(html)}),
+              method: 'POST',
+              signal,
+            })
+          ).data,
+    queryKey: ['compatibility', html, clients],
   })
 }
 

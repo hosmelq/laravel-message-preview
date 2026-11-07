@@ -25,16 +25,12 @@ import pluralize from 'pluralize'
 import type {ComponentType} from 'react'
 import ReactMarkdown from 'react-markdown'
 
-import {
-  clientFamilies,
-  type ClientSupport,
-  type CompatibilityIssue,
-  type SupportLevel,
-} from '#/lib/caniemail'
 import {formatList} from '#/lib/format'
+import {settings} from '#/lib/settings'
 import {previewStore} from '#/lib/store'
 import {EmptyView} from '#/pages/_components/EmptyView'
 import {InfoTip} from '#/pages/_components/InfoTip'
+import type {ClientSupport, CompatibilityIssue, SupportLevel} from '#/types/preview'
 
 const levels: Record<
   SupportLevel,
@@ -130,7 +126,7 @@ function CompatibilityTable(props: CompatibilityTableProps) {
   const {clients, issues} = props
   const columns = [
     {id: 'feature', name: 'Feature'},
-    ...clients.map((id) => ({id, name: clientFamilies[id] ?? id})),
+    ...clients.map((id) => ({id, name: settings.clients[id] ?? id})),
   ]
 
   return (
@@ -203,13 +199,13 @@ function ClientPicker() {
           selectionMode="multiple"
           onSelectionChange={(keys) =>
             previewStore.trigger.clientsChanged({
-              clients: Object.keys(clientFamilies).filter(
+              clients: Object.keys(settings.clients).filter(
                 (family) => keys === 'all' || keys.has(family),
               ),
             })
           }
         >
-          {Object.entries(clientFamilies).map(([id, name]) => (
+          {Object.entries(settings.clients).map(([id, name]) => (
             <Dropdown.Item key={id} id={id} textValue={name}>
               <Dropdown.ItemIndicator />
               <Label>{name}</Label>
@@ -236,7 +232,7 @@ export function CompatibilityPanel(props: CompatibilityPanelProps) {
         <ClientPicker />
         <InfoTip
           label="About the client support data"
-          text="Support data from caniemail.com, for the latest tested version of each client. Press a status for its platforms and notes."
+          text="Support data from caniemail.com, for the last version it lists for each client. Press a status for its platforms and notes."
         />
       </div>
       {clients.length === 0 ? (

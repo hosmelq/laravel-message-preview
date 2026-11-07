@@ -1,3 +1,4 @@
+@inject('clientFamilies', 'HosmelQ\MessagePreview\Compatibility\ClientFamilies')
 @inject('vite', 'HosmelQ\MessagePreview\Vite')
 <!DOCTYPE html>
 <html lang="en">
@@ -28,6 +29,7 @@
         @php
             $settings = [
                 'app_name' => config()->string('app.name') ?: 'Message Preview',
+                'clients' => $clientFamilies->all(),
                 'default_mailer' => config()->string('mail.default'),
                 'mailers' => array_keys(config()->array('mail.mailers')),
                 'poll_interval' => config()->integer('message-preview.auto_refresh.interval'),

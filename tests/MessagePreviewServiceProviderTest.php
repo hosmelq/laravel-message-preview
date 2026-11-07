@@ -2,9 +2,15 @@
 
 declare(strict_types=1);
 
+use HosmelQ\CanIEmail\CanIEmail;
 use HosmelQ\MessagePreview\MessageCatalog;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Route;
+
+it('registers the bundled caniemail data as a singleton', function (): void {
+    expect(app()->isShared(CanIEmail::class))->toBeTrue()
+        ->and(app(CanIEmail::class))->toBe(CanIEmail::create());
+});
 
 it('registers the message catalog as a singleton', function (): void {
     expect(app(MessageCatalog::class))->toBe(app(MessageCatalog::class));

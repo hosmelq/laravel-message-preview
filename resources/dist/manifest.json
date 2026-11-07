@@ -1,11 +1,4 @@
 {
-  "_caniemail-DCMk6CFV.js": {
-    "file": "assets/caniemail-DCMk6CFV.js",
-    "name": "caniemail",
-    "imports": [
-      "_rolldown-runtime-COiEfhsA.js"
-    ]
-  },
   "_lib-Cg-oQJ-D.js": {
     "file": "assets/lib-Cg-oQJ-D.js",
     "name": "lib",
@@ -18,7 +11,7 @@
     "name": "rolldown-runtime"
   },
   "resources/js/app.tsx": {
-    "file": "assets/app-DHglGRsA.js",
+    "file": "assets/app-C1n03ytA.js",
     "name": "app",
     "src": "resources/js/app.tsx",
     "isEntry": true,
@@ -27,7 +20,6 @@
     ],
     "dynamicImports": [
       "resources/js/lib/accessibility.ts",
-      "_caniemail-DCMk6CFV.js",
       "resources/js/pages/_components/ChecksResults.tsx",
       "resources/js/lib/highlight.ts"
     ],
@@ -36,7 +28,7 @@
     ]
   },
   "resources/js/lib/accessibility.ts": {
-    "file": "assets/accessibility-DAlB3d6O.js",
+    "file": "assets/accessibility-ClHYQhro.js",
     "name": "accessibility",
     "src": "resources/js/lib/accessibility.ts",
     "isDynamicEntry": true,
@@ -54,15 +46,14 @@
     ]
   },
   "resources/js/pages/_components/ChecksResults.tsx": {
-    "file": "assets/ChecksResults-SK4xLbh3.js",
+    "file": "assets/ChecksResults-tXU9nWKv.js",
     "name": "ChecksResults",
     "src": "resources/js/pages/_components/ChecksResults.tsx",
     "isDynamicEntry": true,
     "imports": [
       "_rolldown-runtime-COiEfhsA.js",
       "resources/js/app.tsx",
-      "_lib-Cg-oQJ-D.js",
-      "_caniemail-DCMk6CFV.js"
+      "_lib-Cg-oQJ-D.js"
     ]
   }
 }

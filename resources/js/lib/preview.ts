@@ -12,6 +12,7 @@ import {useQueryStates} from 'nuqs'
 
 import {
   catalogQuery,
+  compatibilityQuery,
   fingerprintQuery,
   invalidatePreview,
   linksQuery,
@@ -192,16 +193,7 @@ function checkQueries(
             },
       queryKey: ['checks', 'accessibility', html, scheme, blockImages],
     }),
-    compatibility: queryOptions({
-      queryFn:
-        rendered === null
-          ? skipToken
-          : async () =>
-              html === null || clients.length === 0
-                ? []
-                : (await import('#/lib/caniemail')).checkCompatibility(html, clients),
-      queryKey: ['checks', 'compatibility', html, clients],
-    }),
+    compatibility: queryOptions({...compatibilityQuery(html, clients), enabled: rendered !== null}),
     links: queryOptions({...linksQuery(html), enabled: rendered !== null}),
     message: queryOptions({
       queryFn: rendered === null ? skipToken : () => checkMessage(rendered),
@@ -295,6 +287,7 @@ export function useRefresh(selection: null | Selection) {
       queryKey: ['preview', selection?.message, selection?.variant, selection?.locale],
     })
     void queryClient.invalidateQueries({queryKey: ['links']})
+    void queryClient.invalidateQueries({queryKey: ['compatibility']})
   }
 }
 

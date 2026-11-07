@@ -2,6 +2,8 @@ export type ColorScheme = 'dark' | 'light'
 
 export type MessageKind = 'mailable' | 'notification'
 
+export type SupportLevel = 'full' | 'none' | 'partial' | 'unknown'
+
 export type ViewMode = 'html' | 'source' | 'text'
 
 export interface Address {
@@ -44,6 +46,7 @@ export interface Catalog {
 
 export interface Settings {
   app_name: string
+  clients: Record<string, string>
   default_mailer: string
   mailers: string[]
   poll_interval: number
@@ -91,6 +94,22 @@ export interface LinkCheck {
   reason: null | string
   route_name: null | string
   status: 'broken' | 'ok' | 'redirected' | 'unreachable'
+  url: string
+}
+
+export interface ClientSupport {
+  id: string
+  level: SupportLevel
+  limited: string[]
+  missing: string[]
+  name: string
+  notes: string[]
+  unknown: string[]
+}
+
+export interface CompatibilityIssue {
+  clients: ClientSupport[]
+  title: string
   url: string
 }
 
