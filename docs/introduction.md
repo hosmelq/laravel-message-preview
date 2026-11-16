@@ -1,6 +1,6 @@
 ---
 title: "Introduction"
-description: "Preview Laravel mailables and mail notifications in the browser."
+description: "Laravel Message Preview shows your mailables and mail notifications in the browser, with checks and sample data."
 weight: 1
 ---
 

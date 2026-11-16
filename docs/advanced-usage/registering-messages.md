@@ -1,6 +1,6 @@
 ---
 title: "Registering Messages"
-description: "Preview Laravel's own notifications and messages from packages."
+description: "Preview Laravel's own notifications and the mail messages that come from third-party packages."
 weight: 1
 ---
 

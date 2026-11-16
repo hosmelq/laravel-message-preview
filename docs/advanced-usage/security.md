@@ -1,6 +1,6 @@
 ---
 title: "Security"
-description: "Who can open the preview and what the link check requests."
+description: "See who can open the Laravel Message Preview page and which requests its link check makes."
 weight: 3
 ---
 

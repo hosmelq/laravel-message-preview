@@ -1,6 +1,6 @@
 ---
 title: "Installation"
-description: "Install Laravel Message Preview and publish its assets."
+description: "Install Laravel Message Preview with Composer, publish its assets, and open the preview in your browser."
 weight: 2
 ---
 
