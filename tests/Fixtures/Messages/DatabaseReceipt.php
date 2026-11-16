@@ -34,7 +34,12 @@ final class DatabaseReceipt extends Mailable
             throw new RuntimeException('Database receipt failed.');
         }
 
-        return new Content(htmlString: '<p>'.DB::table('preview_records')
-            ->where('id', $this->recordId)->value('name').': '.$this->recordId.'</p>');
+        return new Content(
+            htmlString: '<p>'
+                .DB::table('preview_records')->where('id', $this->recordId)->value('name')
+                .': '
+                .$this->recordId
+                .'</p>',
+        );
     }
 }
