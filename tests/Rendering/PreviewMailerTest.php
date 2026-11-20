@@ -90,3 +90,17 @@ it('uses the return path of the mailer a message asks for', function (): void {
     expect($marketing->getReturnPath()?->getAddress())->toBe('news-bounces@studio.test')
         ->and($default->getReturnPath()?->getAddress())->toBe('bounces@studio.test');
 });
+
+it('keeps a mailer address that is explicitly empty', function (): void {
+    config([
+        'mail.mailers.marketing' => ['reply_to' => null, 'return_path' => null],
+        'mail.reply_to' => ['address' => 'help@studio.test'],
+        'mail.return_path' => ['address' => 'bounces@studio.test'],
+    ]);
+
+    new TextReceipt()->mailer('marketing')->send($this->mailer);
+
+    $email = $this->mailer->captured()->email;
+
+    expect($email->getReplyTo())->toBe([])->and($email->getReturnPath())->toBeNull();
+});

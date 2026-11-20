@@ -10,6 +10,7 @@ use function Safe\stream_get_contents;
 use Illuminate\Contracts\Mail\Factory as MailFactory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Mail\Mailer;
+use Illuminate\Support\Arr;
 use LogicException;
 use Override;
 use Symfony\Component\Mailer\Transport\NullTransport;
@@ -44,7 +45,7 @@ final class PreviewMailer extends Mailer implements MailFactory
         );
 
         foreach (['from', 'reply_to', 'return_path'] as $type) {
-            $address = $config[$type] ?? config('mail.'.$type);
+            $address = Arr::get($config, $type, config('mail.'.$type));
 
             if (! is_array($address) || ! is_string($address['address'] ?? null)) {
                 continue;
