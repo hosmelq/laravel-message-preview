@@ -14,11 +14,12 @@ use HosmelQ\MessagePreview\Http\Controllers\PreviewHtmlController;
 use HosmelQ\MessagePreview\Http\Controllers\PreviewTextController;
 use HosmelQ\MessagePreview\Http\Controllers\SendMessageController;
 use HosmelQ\MessagePreview\Http\Middleware\EnsureLocalEnvironment;
+use HosmelQ\MessagePreview\Http\Middleware\RejectCrossSiteRequests;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix(config()->string('message-preview.route.path'))
     ->as('message-preview.')
-    ->middleware(EnsureLocalEnvironment::class)
+    ->middleware([EnsureLocalEnvironment::class, RejectCrossSiteRequests::class])
     ->group(function (): void {
         Route::get('/', HomeController::class)->name('index');
 

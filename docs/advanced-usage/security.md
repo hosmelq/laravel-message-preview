@@ -14,6 +14,10 @@ The preview's routes answer only when `APP_ENV` is `local`. In every other envir
 
 The preview needs no session or authentication, so its routes skip the `web` middleware group.
 
+## Requests from other sites
+
+Without the `web` group there is no CSRF token, so the preview relies on the headers that browsers send. A request that sends a test email or runs a check gets a `403` when its `Sec-Fetch-Site` header reports another origin, or, on plain HTTP sites where browsers leave that header out, when its `Origin` header names another origin. A website you visit cannot send your messages through your mailers.
+
 ## What the Links check requests
 
 The [Links check](../basic-usage/checks) requests the absolute HTTP and HTTPS URLs in a message's links and images. URLs on the `APP_URL` host or the host the preview is open on are never requested. The check matches them against the application's GET routes and the files in `public` without running a route's middleware or controller, so it never uses one of your application's signed verification, password-reset, or unsubscribe links.
