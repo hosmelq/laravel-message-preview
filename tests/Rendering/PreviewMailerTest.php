@@ -72,3 +72,21 @@ it('uses the sender and reply-to address of the mailer a message asks for', func
         ->and($default->getFrom()[0]->getAddress())->toBe('hello@studio.test')
         ->and($default->getReplyTo()[0]->getAddress())->toBe('help@studio.test');
 });
+
+it('uses the return path of the mailer a message asks for', function (): void {
+    config([
+        'mail.mailers.marketing' => ['return_path' => ['address' => 'news-bounces@studio.test']],
+        'mail.return_path' => ['address' => 'bounces@studio.test'],
+    ]);
+
+    new TextReceipt()->mailer('marketing')->send($this->mailer);
+
+    $marketing = $this->mailer->captured()->email;
+
+    new TextReceipt()->send($this->mailer);
+
+    $default = $this->mailer->captured()->email;
+
+    expect($marketing->getReturnPath()?->getAddress())->toBe('news-bounces@studio.test')
+        ->and($default->getReturnPath()?->getAddress())->toBe('bounces@studio.test');
+});

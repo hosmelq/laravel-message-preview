@@ -43,7 +43,7 @@ final class PreviewMailer extends Mailer implements MailFactory
             'mail.mailers.'.(is_string($mailer) ? $mailer : config()->string('mail.default')),
         );
 
-        foreach (['from', 'reply_to'] as $type) {
+        foreach (['from', 'reply_to', 'return_path'] as $type) {
             $address = $config[$type] ?? config('mail.'.$type);
 
             if (! is_array($address) || ! is_string($address['address'] ?? null)) {
@@ -54,8 +54,10 @@ final class PreviewMailer extends Mailer implements MailFactory
 
             if ($type === 'from') {
                 $this->alwaysFrom($address['address'], $name);
-            } else {
+            } elseif ($type === 'reply_to') {
                 $this->alwaysReplyTo($address['address'], $name);
+            } else {
+                $this->alwaysReturnPath($address['address']);
             }
         }
 

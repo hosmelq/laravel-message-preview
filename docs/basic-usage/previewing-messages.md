@@ -18,7 +18,7 @@ Open messages are tabs above the email. A click in the sidebar opens the message
 
 The subject, sender, recipients, reply-to address, and attachments appear above the email. Select an attachment to download it.
 
-The preview builds the message with Laravel's mail pipeline and a mailer that keeps the message instead of sending it, so no mail or notification events are dispatched. A message that sets no sender gets the `from` address configured for its mailer in `config/mail.php`, or else `mail.from`. The `reply_to` address configured for the mailer, or else `mail.reply_to`, is added to every message, as Laravel does when it sends. A global `mail.to` address is not applied.
+The preview builds the message with Laravel's mail pipeline and a mailer that keeps the message instead of sending it, so no mail or notification events are dispatched. A message that sets no sender gets the `from` address configured for its mailer in `config/mail.php`, or else `mail.from`. The `reply_to` and `return_path` addresses configured for the mailer, or else `mail.reply_to` and `mail.return_path`, are added to every message, as Laravel does when it sends. A global `mail.to` address is not applied.
 
 ## Switch the body
 

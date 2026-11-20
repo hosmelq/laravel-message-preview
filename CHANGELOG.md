@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Require Laravel 13 and hosmelq/caniemail 1.1.1, which checks CSS with long strings and detects inline and two-keyword grid containers.
 - Reject requests from other origins that send a test email or run a check, so a website you visit cannot send your messages through your mailers.
+- Set the `return_path` address configured for the mailer, or else `mail.return_path`, on every message, as Laravel does when it sends.
 
 ## v1.1.1 - 2026-11-16
 
