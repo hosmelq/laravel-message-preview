@@ -40,7 +40,7 @@ it('does not report existence checks', function (): void {
 
     expect($translator->has('messages.checked', 'es'))->toBeFalse()
         ->and($translator->hasForLocale('messages.fallback', 'es'))->toBeFalse()
-        ->and($translator->missingTranslations('es'))->toBe([]);
+        ->and($translator->missingTranslations('es'))->toBeEmpty();
 });
 
 it('records each text a reported key rendered as', function (): void {

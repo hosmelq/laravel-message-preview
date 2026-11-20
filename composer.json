@@ -31,22 +31,23 @@
     "require": {
         "php": "^8.4",
         "ext-dom": "*",
-        "composer/class-map-generator": "^1.7",
-        "guzzlehttp/psr7": "^2.9 || ^3.0",
-        "hosmelq/caniemail": "^1.1",
-        "laravel/framework": "^12.0 || ^13.0",
+        "composer/class-map-generator": "^1.9.0",
+        "guzzlehttp/psr7": "^2.13.0 || ^3.5.0",
+        "hosmelq/caniemail": "^1.1.1",
+        "laravel/framework": "^13.42.0",
         "psr/http-message": "^1.1 || ^2.0",
-        "spatie/laravel-package-tools": "^1.93",
-        "thecodingmachine/safe": "^3.4"
+        "spatie/laravel-package-tools": "^1.93.3",
+        "thecodingmachine/safe": "^3.4.0"
     },
     "require-dev": {
-        "ergebnis/composer-normalize": "^2.54",
-        "hosmelq/php-coding-standard": "^1.4",
-        "larastan/larastan": "^3.13",
-        "laravel/pao": "^1.1",
-        "orchestra/testbench": "^10.0 || ^11.3",
-        "pestphp/pest": "^4.7 || ^5.3",
-        "shipmonk/composer-dependency-analyser": "^1.8"
+        "ergebnis/composer-normalize": "^2.57.0",
+        "hosmelq/php-coding-standard": "^1.5.0",
+        "larastan/larastan": "^3.15.0",
+        "orchestra/testbench": "^11.3.0",
+        "pestphp/pest": "^5.3.6",
+        "pestphp/pest-plugin-agent": "^5.0.0",
+        "pestphp/pest-plugin-rector": "^5.0.6",
+        "shipmonk/composer-dependency-analyser": "^1.8.4"
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
@@ -77,9 +78,8 @@
         }
     },
     "scripts": {
-        "ecs": "ecs check --fix=true",
-        "ecs:check": "ecs check",
-        "phpstan": "phpstan analyse --configuration=phpstan.neon.dist --memory-limit=4G",
+        "ecs": "ecs check --fix",
+        "phpstan": "phpstan analyse --memory-limit=4G",
         "rector": "rector",
         "serve": [
             "Composer\\Config::disableProcessTimeout",
@@ -90,13 +90,12 @@
         "test-coverage": "pest --coverage"
     },
     "scripts-descriptions": {
-        "ecs": "Format PHP code using the shared ECS set.",
-        "ecs:check": "Check PHP formatting using the shared ECS set.",
-        "phpstan": "Run PHPStan static analysis.",
-        "rector": "Run Rector automated refactoring.",
-        "serve": "Build and serve the local Workbench application.",
-        "test": "Run the test suite using Pest.",
-        "test-coverage": "Run the test suite with code coverage using Pest."
+        "ecs": "Runs ECS.",
+        "phpstan": "Runs PHPStan analyse.",
+        "rector": "Runs Rector.",
+        "serve": "Builds and serves the Workbench application.",
+        "test": "Runs the Pest test suite.",
+        "test-coverage": "Runs the Pest test suite with code coverage."
     },
     "$schema": "https://getcomposer.org/schema.json"
 }

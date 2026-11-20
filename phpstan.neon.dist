@@ -7,6 +7,3 @@ parameters:
     - vendor/orchestra/testbench-core/laravel/config
   paths:
     - src
-  phpVersion:
-    max: 80599
-    min: 80400

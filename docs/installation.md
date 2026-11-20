@@ -8,7 +8,7 @@ Install the package with Composer and run its install command. The frontend come
 
 ## Requirements
 
-Laravel Message Preview requires PHP 8.4 or later with the `dom` extension, and Laravel 12 or 13.
+Laravel Message Preview requires PHP 8.4 or later with the `dom` extension, and Laravel 13.
 
 ## Install the package
 

@@ -15,4 +15,4 @@ return RectorConfig::configure()
         __DIR__.'/tests',
         __DIR__.'/workbench',
     ])
-    ->withSets([CodingStandard::RECTOR_LARAVEL_PACKAGE]);
+    ->withSets([CodingStandard::RECTOR_LARAVEL_PACKAGE, CodingStandard::RECTOR_PEST]);

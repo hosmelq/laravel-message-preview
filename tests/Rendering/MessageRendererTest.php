@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
 use Illuminate\Translation\Translator;
 
-uses(DatabaseMigrations::class);
+pest()->use(DatabaseMigrations::class);
 
 it('explains why a notification renders no email', function (
     PreviewConfig $config,

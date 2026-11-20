@@ -6,7 +6,7 @@ use HosmelQ\PhpCodingStandard\CodingStandard;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
 
 return ECSConfig::configure()
-    ->withCache(__DIR__.'/.cache/ecs')
+    ->withCache('./.cache/ecs')
     ->withPaths([
         __DIR__.'/config',
         __DIR__.'/routes',
@@ -14,4 +14,5 @@ return ECSConfig::configure()
         __DIR__.'/tests',
         __DIR__.'/workbench',
     ])
+    ->withRootFiles()
     ->withSets([CodingStandard::ECS_LARAVEL_PACKAGE]);

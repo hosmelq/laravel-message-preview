@@ -37,7 +37,12 @@
   ],
   "dependencyDashboard": true,
   "enabledManagers": ["composer", "custom.jsonata", "custom.regex", "github-actions", "npm"],
-  "extends": ["config:recommended", "group:all", "helpers:pinGitHubActionDigests"],
+  "extends": [
+    "config:recommended",
+    "group:all",
+    "helpers:pinGitHubActionDigests",
+    "schedule:weekly"
+  ],
   "gitIgnoredAuthors": ["41898282+github-actions[bot]@users.noreply.github.com"],
   "includePaths": [".github/workflows/**", "composer.json", "package.json"],
   "minimumReleaseAge": "1 day",
@@ -49,17 +54,21 @@
     },
     {
       "enabled": false,
-      "matchDepNames": ["php"]
+      "matchDepNames": ["php"],
+      "matchManagers": ["composer"]
     },
     {
       "matchManagers": ["composer"],
-      "postUpdateOptions": ["composerWithAll"]
+      "postUpdateOptions": ["composerWithAll"],
+      "rangeStrategy": "bump"
     },
     {
-      "matchManagers": ["composer", "custom.jsonata", "npm"],
+      "matchManagers": ["custom.jsonata", "npm"],
       "rangeStrategy": "bump"
     }
   ],
   "rebaseWhen": "conflicted",
-  "semanticCommits": "enabled"
+  "semanticCommits": "enabled",
+  "timezone": "America/Managua",
+  "updateNotScheduled": false
 }

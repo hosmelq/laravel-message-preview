@@ -23,7 +23,7 @@ it('drops the features no chosen client lacks', function (): void {
         $this->families,
     );
 
-    expect($results)->toBe([]);
+    expect($results)->toBeEmpty();
 });
 
 it('groups the platforms of each client by support', function (): void {
